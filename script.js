@@ -1,4 +1,13 @@
-//make a Rock Paper Scissors game
+//make a Rock Paper Scissors game against the computer that runs in the console for 5 rounds and keeps score of the wins and losses.
+
+
+//create a function that takes the user's input
+
+function userChoice()
+{
+    let choice = prompt('Enter your choice for rock (r), paper (p), or scissors(s):');
+    return choice;
+}
 
 //create a function that randomly returns either 'rock', 'paper', or 'scissors'
 
@@ -19,15 +28,7 @@ function computerChoice()
     }
 }
 
-//create a function that takes the user's input
-
-function userChoice()
-{
-    let choice = prompt('Enter your choice for rock (r), paper (p), or scissors(s):');
-    return choice;
-}
-
-//create a function that compares the user's input to the computer's input
+//create a function that compares the user's input to the computer's input ( single round )
 
 function compare(userChoice, computerChoice)
 {
@@ -77,13 +78,41 @@ function compare(userChoice, computerChoice)
     }
 }
 
-//create a function that plays the game
 
-function playGame()
+
+//create a function that plays 5 rounds of the game and keeps score
+
+function game()
 {
-    let user = userChoice();
-    let computer = computerChoice();
-    let result = console.log(compare(user, computer));
+    let userScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++)
+    {
+        let user = userChoice();
+        let computer = computerChoice();
+        let result = compare(user, computer);
+        console.log(result);
+        if (result.includes('win'))
+        {
+            userScore++;
+        }
+        else if (result.includes('lose'))
+        {
+            computerScore++;
+        }
+    }
+    if (userScore > computerScore)
+    {
+        console.log('You win the game!');
+    }
+    else if (userScore < computerScore)
+    {
+        console.log('You lose the game!');
+    }
+    else
+    {
+        console.log('Tie game!');
+    }
 }
 
-playGame();
+game();

@@ -95,23 +95,33 @@ function game()
         if (result.includes('win'))
         {
             userScore++;
+            console.log ('User score: ' + userScore);
+            console.log ('Computer score: ' + computerScore);
         }
         else if (result.includes('lose'))
         {
             computerScore++;
+            console.log ('User score: ' + userScore);
+            console.log ('Computer score: ' + computerScore);
         }
     }
     if (userScore > computerScore)
     {
         console.log('You win the game!');
+        console.log ('User score: ' + userScore);
+        console.log ('Computer score: ' + computerScore);
     }
     else if (userScore < computerScore)
     {
         console.log('You lose the game!');
+        console.log ('User score: ' + userScore);
+        console.log ('Computer score: ' + computerScore);
     }
     else
     {
         console.log('Tie game!');
+        console.log ('User score: ' + userScore);
+        console.log ('Computer score: ' + computerScore);
     }
 }
 

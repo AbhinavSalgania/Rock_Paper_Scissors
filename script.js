@@ -1,7 +1,6 @@
 let userScore = 0;
 let computerScore = 0;
 
-
 //event Listener for buttons
 
 const buttons = document.querySelectorAll('button');
@@ -48,7 +47,7 @@ function decideWinner(userChoice, computerChoice)
                 '<br> Refresh the page to play again!';
             }
             return 'You win! ' + userChoice + ' beats ' + computerChoice
-            + '<br></br> Your score: ' + userScore + ' Computer score: ' + computerScore;
+            + '<br></br> Your score: '+ userScore + '<br>Computer score: ' + computerScore;
         case 'rp':
         case 'ps':
         case 'sr':
@@ -60,12 +59,12 @@ function decideWinner(userChoice, computerChoice)
                 '<br> Refresh the page to play again!';
             }
             return 'You lose! ' + computerChoice + ' beats ' + userChoice
-            + '<br></br> Your score: ' + userScore + ' Computer score: ' + computerScore;
+            + '<br></br> Your score: ' + userScore + '<br>Computer score: ' + computerScore;
         case 'rr':
         case 'pp':
         case 'ss':
             return 'It\'s a tie! ' + userChoice + ' equals ' + computerChoice
-            + '<br></br> Your score: ' + userScore + ' Computer score: ' + computerScore;
+            + '<br></br> Your score: ' + userScore + '<br>Computer score: ' + computerScore;
     }
 }
 

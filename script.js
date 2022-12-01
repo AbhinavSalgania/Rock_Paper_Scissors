@@ -1,10 +1,14 @@
+let userScore = 0;
+let computerScore = 0;
+
+
 //event Listener for buttons
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => 
 {
     button.addEventListener('click', () => {
-        playRound(button.id);                  
+        playRound(button.id); 
     });
 });
 
@@ -13,75 +17,63 @@ buttons.forEach((button) =>
 function computerChoice()
 {
     let choice = Math.floor(Math.random() * 3);
-    if (choice === 0)
-    {
-        return 'rock';
-    }
-    else if (choice === 1)
-    {
-        return 'paper';
-    }
-    else
-    {
-        return 'scissors';
-    }
+    if (choice === 0)   return 'rock';
+    if (choice === 1)   return 'paper';
+    if (choice === 2)   return 'scissors';
 }
 
-// Start the game and display results
+// Start the game and display the results
 
 function playRound(userChoice)
 {
-    let compChoice = computerChoice();
-    let winner = decideWinner(userChoice, compChoice);
+    let compC = computerChoice();
+    let winner = decideWinner(userChoice, compC);
     document.getElementById('results').innerHTML = winner;
 }
  
-// decide the winner 
+// decide the winners and stops the game when one of the players reaches 5 points
 
 function decideWinner(userChoice, computerChoice)
 {
-    switch (userChoice)
+    switch (userChoice.charAt(0) + computerChoice.charAt(0))
     {
-        case 'rock':
-            if (computerChoice === 'rock')
+        case 'rs':
+        case 'pr':
+        case 'sp':
+            userScore += 1;
+            if (userScore === 5)
             {
-                return 'Tie! Rock vs Rock';
+                disableButtons();
+                return 'You win! You reached 5 points first!' + 
+                '<br> Refresh the page to play again!';
             }
-            else if (computerChoice === 'paper')
+            return 'You win! ' + userChoice + ' beats ' + computerChoice
+            + '<br></br> Your score: ' + userScore + ' Computer score: ' + computerScore;
+        case 'rp':
+        case 'ps':
+        case 'sr':
+            computerScore += 1;
+            if (computerScore === 5)
             {
-                return 'You lose! Paper beats rock';
+                disableButtons();
+                return 'You lose! Computer reached 5 points first!' +
+                '<br> Refresh the page to play again!';
             }
-            else
-            {
-                return 'You win! Rock beats scissors';
-            }
-        case 'paper':
-            if (computerChoice === 'rock')
-            {
-                return 'You win! Paper beats rock';
-            }
-            else if (computerChoice === 'paper')
-            {
-                return 'Tie! Paper vs Paper';
-            }
-            else
-            {
-                return 'You lose! Scissors beats paper';
-            }
-        case 'scissors':
-            if (computerChoice === 'rock')
-            {
-                return 'You lose! Rock beats scissors';
-            }
-            else if (computerChoice === 'paper')
-            {
-                return 'You win! Scissors beats paper';
-            }
-            else
-            {
-                return 'Tie! Scissors vs Scissors';
-            }
-        default:
-            return 'Invalid input';
+            return 'You lose! ' + computerChoice + ' beats ' + userChoice
+            + '<br></br> Your score: ' + userScore + ' Computer score: ' + computerScore;
+        case 'rr':
+        case 'pp':
+        case 'ss':
+            return 'It\'s a tie! ' + userChoice + ' equals ' + computerChoice
+            + '<br></br> Your score: ' + userScore + ' Computer score: ' + computerScore;
     }
+}
+
+// disable buttons when one of the players reaches 5 points
+
+function disableButtons()
+{
+    buttons.forEach ((button) => {
+        button.disabled = true;
+    });
 }

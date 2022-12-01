@@ -1,15 +1,14 @@
-//make a Rock Paper Scissors game against the computer that runs in the console for 5 rounds and keeps score of the wins and losses.
+//event Listener for buttons
 
-
-//create a function that takes the user's input
-
-function userChoice()
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => 
 {
-    let choice = prompt('Enter your choice for rock (r), paper (p), or scissors(s):');
-    return choice;
-}
+    button.addEventListener('click', () => {
+        playRound(button.id);                  
+    });
+});
 
-//create a function that randomly returns either 'rock', 'paper', or 'scissors'
+// computer choice
 
 function computerChoice()
 {
@@ -28,16 +27,25 @@ function computerChoice()
     }
 }
 
-//create a function that compares the user's input to the computer's input ( single round )
+// Start the game and display results
 
-function compare(userChoice, computerChoice)
+function playRound(userChoice)
+{
+    let compChoice = computerChoice();
+    let winner = decideWinner(userChoice, compChoice);
+    document.getElementById('results').innerHTML = winner;
+}
+ 
+// decide the winner 
+
+function decideWinner(userChoice, computerChoice)
 {
     switch (userChoice)
     {
-        case 'r':
+        case 'rock':
             if (computerChoice === 'rock')
             {
-                return 'Tie';
+                return 'Tie! Rock vs Rock';
             }
             else if (computerChoice === 'paper')
             {
@@ -47,20 +55,20 @@ function compare(userChoice, computerChoice)
             {
                 return 'You win! Rock beats scissors';
             }
-        case 'p':
+        case 'paper':
             if (computerChoice === 'rock')
             {
                 return 'You win! Paper beats rock';
             }
             else if (computerChoice === 'paper')
             {
-                return 'Tie';
+                return 'Tie! Paper vs Paper';
             }
             else
             {
                 return 'You lose! Scissors beats paper';
             }
-        case 's':
+        case 'scissors':
             if (computerChoice === 'rock')
             {
                 return 'You lose! Rock beats scissors';
@@ -71,58 +79,9 @@ function compare(userChoice, computerChoice)
             }
             else
             {
-                return 'Tie';
+                return 'Tie! Scissors vs Scissors';
             }
         default:
             return 'Invalid input';
     }
 }
-
-
-
-//create a function that plays 5 rounds of the game and keeps score
-
-function game()
-{
-    let userScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++)
-    {
-        let user = userChoice();
-        let computer = computerChoice();
-        let result = compare(user, computer);
-        console.log(result);
-        if (result.includes('win'))
-        {
-            userScore++;
-            console.log ('User score: ' + userScore);
-            console.log ('Computer score: ' + computerScore);
-        }
-        else if (result.includes('lose'))
-        {
-            computerScore++;
-            console.log ('User score: ' + userScore);
-            console.log ('Computer score: ' + computerScore);
-        }
-    }
-    if (userScore > computerScore)
-    {
-        console.log('You win the game!');
-        console.log ('User score: ' + userScore);
-        console.log ('Computer score: ' + computerScore);
-    }
-    else if (userScore < computerScore)
-    {
-        console.log('You lose the game!');
-        console.log ('User score: ' + userScore);
-        console.log ('Computer score: ' + computerScore);
-    }
-    else
-    {
-        console.log('Tie game!');
-        console.log ('User score: ' + userScore);
-        console.log ('Computer score: ' + computerScore);
-    }
-}
-
-game();

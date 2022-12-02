@@ -1,128 +1,78 @@
-//make a Rock Paper Scissors game against the computer that runs in the console for 5 rounds and keeps score of the wins and losses.
+let userScore = 0;
+let computerScore = 0;
 
+//event Listener for buttons
 
-//create a function that takes the user's input
-
-function userChoice()
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => 
 {
-    let choice = prompt('Enter your choice for rock (r), paper (p), or scissors(s):');
-    return choice;
-}
+    button.addEventListener('click', () => {
+        playRound(button.id); 
+    });
+});
 
-//create a function that randomly returns either 'rock', 'paper', or 'scissors'
+// computer choice
 
 function computerChoice()
 {
     let choice = Math.floor(Math.random() * 3);
-    if (choice === 0)
-    {
-        return 'rock';
-    }
-    else if (choice === 1)
-    {
-        return 'paper';
-    }
-    else
-    {
-        return 'scissors';
-    }
+    if (choice === 0)   return 'rock';
+    if (choice === 1)   return 'paper';
+    if (choice === 2)   return 'scissors';
 }
 
-//create a function that compares the user's input to the computer's input ( single round )
+// Start the game and display the results
 
-function compare(userChoice, computerChoice)
+function playRound(userChoice)
 {
-    switch (userChoice)
-    {
-        case 'r':
-            if (computerChoice === 'rock')
-            {
-                return 'Tie';
-            }
-            else if (computerChoice === 'paper')
-            {
-                return 'You lose! Paper beats rock';
-            }
-            else
-            {
-                return 'You win! Rock beats scissors';
-            }
-        case 'p':
-            if (computerChoice === 'rock')
-            {
-                return 'You win! Paper beats rock';
-            }
-            else if (computerChoice === 'paper')
-            {
-                return 'Tie';
-            }
-            else
-            {
-                return 'You lose! Scissors beats paper';
-            }
-        case 's':
-            if (computerChoice === 'rock')
-            {
-                return 'You lose! Rock beats scissors';
-            }
-            else if (computerChoice === 'paper')
-            {
-                return 'You win! Scissors beats paper';
-            }
-            else
-            {
-                return 'Tie';
-            }
-        default:
-            return 'Invalid input';
-    }
+    let compC = computerChoice();
+    let winner = decideWinner(userChoice, compC);
+    document.getElementById('results').innerHTML = winner;
 }
+ 
+// decide the winners and stops the game when one of the players reaches 5 points
 
-
-
-//create a function that plays 5 rounds of the game and keeps score
-
-function game()
+function decideWinner(userChoice, computerChoice)
 {
-    let userScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++)
+    switch (userChoice.charAt(0) + computerChoice.charAt(0))
     {
-        let user = userChoice();
-        let computer = computerChoice();
-        let result = compare(user, computer);
-        console.log(result);
-        if (result.includes('win'))
-        {
-            userScore++;
-            console.log ('User score: ' + userScore);
-            console.log ('Computer score: ' + computerScore);
-        }
-        else if (result.includes('lose'))
-        {
-            computerScore++;
-            console.log ('User score: ' + userScore);
-            console.log ('Computer score: ' + computerScore);
-        }
-    }
-    if (userScore > computerScore)
-    {
-        console.log('You win the game!');
-        console.log ('User score: ' + userScore);
-        console.log ('Computer score: ' + computerScore);
-    }
-    else if (userScore < computerScore)
-    {
-        console.log('You lose the game!');
-        console.log ('User score: ' + userScore);
-        console.log ('Computer score: ' + computerScore);
-    }
-    else
-    {
-        console.log('Tie game!');
-        console.log ('User score: ' + userScore);
-        console.log ('Computer score: ' + computerScore);
+        case 'rs':
+        case 'pr':
+        case 'sp':
+            userScore += 1;
+            if (userScore === 5)
+            {
+                disableButtons();
+                return 'You win! You reached 5 points first!' + 
+                '<br> Refresh the page to play again!';
+            }
+            return 'You win! ' + userChoice + ' beats ' + computerChoice
+            + '<br></br> Your score: '+ userScore + '<br>Computer score: ' + computerScore;
+        case 'rp':
+        case 'ps':
+        case 'sr':
+            computerScore += 1;
+            if (computerScore === 5)
+            {
+                disableButtons();
+                return 'You lose! Computer reached 5 points first!' +
+                '<br> Refresh the page to play again!';
+            }
+            return 'You lose! ' + computerChoice + ' beats ' + userChoice
+            + '<br></br> Your score: ' + userScore + '<br>Computer score: ' + computerScore;
+        case 'rr':
+        case 'pp':
+        case 'ss':
+            return 'It\'s a tie! ' + userChoice + ' equals ' + computerChoice
+            + '<br></br> Your score: ' + userScore + '<br>Computer score: ' + computerScore;
     }
 }
 
-game();
+// disable buttons when one of the players reaches 5 points
+
+function disableButtons()
+{
+    buttons.forEach ((button) => {
+        button.disabled = true;
+    });
+}

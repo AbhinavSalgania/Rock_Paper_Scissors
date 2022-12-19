@@ -1,30 +1,69 @@
-body {
-    background-color: black;
+body{
+    background-color: rgb(43, 43, 43);
+    color: rgb(251, 251, 251);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
+header{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: rgb(163, 163, 163);
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+    background-color: rgb(19, 19, 19);
+    height: 5em;
+    padding-top: 1em;
 }
 
-/* Add style to results id div */
+div {
+    display: flex;
+    justify-content: space-between;
+}
+  
+button {
+    background-color: rgb(43,43,43);
+    border: solid 1px rgb(232, 231, 232);
+    color: white;
+    padding: 10px 50px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 16px;
+    margin: 20px;
+    margin-top: 4em;
+}
+  
+button:hover{
+    cursor: pointer;
+    background-color: rgb(232, 231, 232);
+    color: rgb(43,43,43);
+}
 
 #results {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 32px;
+
+    padding-top: 3em;
+    font-size: 1em;
+    color: rgb(163, 163, 163);
     text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 2em;
+    background-color: rgb(110,110,110);
+    text-align: center;
+    color: rgb(251, 251, 251);
+}
+
+a{
+    color: rgb(251, 251, 251);
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+    font-size: 0.9em;
 }

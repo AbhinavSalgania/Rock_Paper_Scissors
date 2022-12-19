@@ -68,11 +68,12 @@ function decideWinner(userChoice, computerChoice)
     }
 }
 
-// disable buttons when one of the players reaches 5 points
+// disable buttons when one of the players reaches 5 points and change color of the buttons
 
 function disableButtons()
 {
     buttons.forEach ((button) => {
         button.disabled = true;
+        button.style.color = "rgb(43,43,43)";
     });
 }
